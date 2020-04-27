@@ -7,9 +7,9 @@ WORKDIR /app
 COPY --from=clone /app/MonitoringTestService /app 
 RUN mvn clean install
 
-FROM openjdk:8-jre-alpine
-WORKDIR /app
+FROM java:8-jdk-alpine
 COPY --from=build /app/MonitoringTestService.yml /app
 COPY --from=build /app/target/MonitoringTestService-1.0-SNAPSHOT.jar /app
+WORKDIR /app
 EXPOSE 8087
-CMD ["java -jar MonitoringTestService-1.0-SNAPSHOT.jar server MonitoringTestService.yml"]
+ENTRYPOINT ["java", "-jar", "MonitoringTestService-1.0-SNAPSHOT.jar", "server", "MonitoringTestService.yml"]
