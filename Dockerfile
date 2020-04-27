@@ -11,4 +11,5 @@ FROM openjdk:8-jre-alpine
 WORKDIR /app
 COPY --from=build /app/MonitoringTestService.yml /app
 COPY --from=build /app/target/MonitoringTestService-1.0-SNAPSHOT.jar /app
-CMD ["java", "-jar MonitoringTestService-1.0-SNAPSHOT.jar server MonitoringTestService.yml"]
+EXPOSE 8087
+CMD ["java -jar MonitoringTestService-1.0-SNAPSHOT.jar server MonitoringTestService.yml"]
